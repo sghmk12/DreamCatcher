@@ -14,7 +14,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
         return;
     }
 
-	// We only support GET commands for now
+	// We only support GET commands for now (just the test)
     if r.Method != "GET" {
         http.Error(w, "Method is not supported.", http.StatusNotFound);
         return;
