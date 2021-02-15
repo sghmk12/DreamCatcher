@@ -1,8 +1,72 @@
-<html>
+<!-- <html>
     <head>
       <title>Welcome to Dream Catcher Boi</title>
     </head>
     <body>
       <h2>Welcome to Dream Catcher</h2>
     </body>
-  </html>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <title>Welcome to Dream Catcher</title>
+</head>
+
+<body>
+  <!--
+    This section contains the form, that will be used to hit the
+    `POST /form` API that we will build in the next section
+   -->
+  <form method="POST" action="/form">     
+    <label>Name</label><input name="name" type="text" value="" />
+    <label>Address</label><input name="address" type="text" value="" />
+    <label>Blog</label><input name="blog" type="text" value="" />
+    <input type="submit" value="submit" />
+  </form>
+
+  <!--
+    Finally, the last section is the script that will
+    run on each page load to fetch the list of birds
+    and add them to our existing table
+   -->
+  <script>
+    blogTable = document.querySelector("table")
+
+    /*
+    Use the browsers `fetch` API to make a GET call to /form
+    We expect the response to be a JSON list of blogs, of the
+    form :
+    [
+      {"Name":"...","Address":"...", "Blog": "..."},
+      {"Name":"...","Address":"...", "Blog": "..."}
+    ]
+    */
+    fetch("/from")
+      .then(response => response.json())
+      .then(blogList => {
+        //Once we fetch the list, we iterate over it
+        blogList.forEach(blog => {
+          // Create the table row
+          row = document.createElement("tr")
+
+          // Create the table data elements for the species and
+					// description columns
+          username = document.createElement("td")
+          username.innerHTML = blog.name
+          address = document.createElement("td")
+          address.innerHTML = blog.address
+          blog = document.createElement("td")
+          blog = blog.blog
+
+          // Add the data elements to the row
+          row.appendChild(username)
+          row.appendChild(address)
+          row.appendChild(blog)
+          // Finally, add the row element to the table itself
+          blogTable.appendChild(row)
+        })
+      })
+  </script>
+</body>
